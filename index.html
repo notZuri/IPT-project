@@ -1,0 +1,76 @@
+<!-- Ian Christian F. Amistoso 
+     LFCA322A012 
+     IPT1 API PROJECT -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WTF</title>
+    
+    <!-- Load Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="max-w-4xl mx-auto p-6">
+        
+        <!-- Header Section -->
+        <header class="flex justify-between items-center py-5">
+            <h1 class="text-3xl font-bold text-indigo-600">🌦️ WTF (Weather, Trends, Facts) 📰</h1>
+        </header>
+
+        <!-- Weather Section -->
+        <section class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h2 class="text-2xl font-semibold text-indigo-600 mb-3">💸Pera Sana ang Bumuhos, Hindi Ulan🌦️</h2>
+
+            <!-- Weather Search Input -->
+            <div class="flex gap-3 mt-3 relative">
+                <input type="text" id="cityInput" placeholder="Enter city..." 
+                    class="flex-1 p-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    aria-label="Search city" onkeyup="autoCompleteCity()">
+                <button onclick="getWeather()" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:scale-105 transition-all">
+                    🔍 Search
+                </button>
+            </div>
+
+            <!-- Dropdown for City Suggestions -->
+            <div id="citySuggestions" class="absolute bg-white shadow-md rounded-md mt-1 w-full z-10"></div>
+            
+            <!-- Weather Result Display -->
+            <div id="weatherResult" class="mt-6"></div>
+        </section>
+
+        <!-- News Section -->
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-indigo-600 mb-3">📰Balitang Bigatin, Parang Utang Mo👀</h2>
+
+            <!-- News Category Buttons -->
+            <div class="flex gap-2 mt-3">
+                <button onclick="fetchNews('general')" class="tab">General</button>
+                <button onclick="fetchNews('technology')" class="tab">Technology</button>
+                <button onclick="fetchNews('sports')" class="tab">Sports</button>
+                <button onclick="fetchNews('business')" class="tab">Business</button>
+                <button onclick="fetchNews('health')" class="tab">Health</button>
+            </div>
+
+            <!-- News Container -->
+            <div id="newsContainer" class="mt-4"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© Developed by Ian Christian Amistoso</p>
+    </footer>
+    
+
+    <!-- JavaScript File -->
+    <script src="script.js"></script>
+
+</body>
+</html>

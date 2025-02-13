@@ -2,9 +2,8 @@
 // LFCA322A012 
 // IPT1 API PROJECT 
 
-
 const weatherApiKey = "c0d5ae6a7db44ff4a144b9726a224648"; 
-const newsApiKey = "c6b483cbab53437380dddb03f0b49f95"; 
+const newsApiKey = "70f1b191bd4d5ec6089b52dafc9b3716"; // Updated GNews API Key
 
 // Autocomplete Function for City Search
 async function autoCompleteCity() {
@@ -75,18 +74,18 @@ function displayWeather(data) {
     `;
 }
 
-// Fetch News Articles by Category or Search Query
+// Fetch News Articles by Category or Search Query using GNews API
 async function fetchNews(category = "general", query = "") {
     try {
         showLoading("newsContainer"); 
         const url = query 
-            ? `https://newsapi.org/v2/everything?q=${query}&apiKey=${newsApiKey}` 
-            : `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${newsApiKey}`;
+            ? `https://gnews.io/api/v4/search?q=${query}&token=${newsApiKey}&lang=en&max=5`
+            : `https://gnews.io/api/v4/top-headlines?category=${category}&token=${newsApiKey}&lang=en&max=5`;
         
         const response = await fetch(url);
         const data = await response.json();
 
-        if (!data.articles.length) { 
+        if (!data.articles || data.articles.length === 0) { 
             document.getElementById("newsContainer").innerHTML = `<p class="text-red-500">❌ No news available.</p>`;
             return;
         }
@@ -110,7 +109,7 @@ function displayNews(articles) {
     const newsContainer = document.getElementById("newsContainer");
     newsContainer.innerHTML = "";
 
-    articles.slice(0, 5).forEach(article => { 
+    articles.forEach(article => { 
         const newsCard = document.createElement("div");
         newsCard.classList.add("news-card", "bg-gray-100", "p-4", "rounded-md", "mt-3", "shadow-md", "transition-all", "hover:scale-105");
         newsCard.innerHTML = `
